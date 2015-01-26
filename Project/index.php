@@ -1,20 +1,19 @@
-<DOCTYPE html>
-    <html>
-    <form method="post" action="process.php">
-        <select name="car">
-            <?php
-            $cars[0] = 'aaaaaa';
-            $cars[1] = 'bbbbbb';
-            $cars[2] = 'cccccc';
-            $cars[3] = 'dddddd';
-            $cars[4] = 'eeeeee';
-            $cars[5] = 'ffffff';
+<?php
 
-            foreach ($cars as $car) {
-                echo '<option value="'.$car.'">'.$car.'</option>';
-            }
-            ?>
-        </select>
-        <input type="submit" value="Select">
-    </form>
-    </html>
+require dirname(realpath(__FILE__)) . "/" . "config/Constants.php";
+require BASE_PATH . "lib/Main.php";
+
+$main = new Main();
+
+$results = $main->getGrill();
+
+?>
+
+<form method="POST" name="myform" action="process.php">
+    <select id="campeonatos" name="campeonatos">
+        <? foreach ($results as $result) { ?>
+            <option value="<? echo $result['ID'] ?>"><? echo $result['NAME'] ?></option>
+        <? } ?>
+    </select>
+    <INPUT TYPE="submit" name="Buscar" />
+</form>
